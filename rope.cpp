@@ -35,3 +35,25 @@ void RString::reset_split_array() const {
         split_count = 0;
     }
 }
+
+void RString::swap(RString & b) {
+    std::swap(_str_, b._str_);
+    std::swap(str_len, b.str_len);
+}
+
+const char * RString::c_str() const {
+    return _str_;
+}
+
+const char * RString::copy_str(const char * s) {
+    if(s){
+        size_t len = strlen(s); //todo check why the strlen wont accept int for the max size comparison
+        alloc_str(len);
+        strncpy((char *) _str_, s, len);
+    }
+    return _str_;
+}
+
+const char* RString::alloc_str(size_t s){
+    //TODO
+}
