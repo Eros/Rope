@@ -1,5 +1,4 @@
 #include "rope.hpp"
-#pragma mark - constructors/destructors
 
 RString::RString() { reset(); }
 RString::RString(const char * s) { copy_str(s); }
@@ -15,8 +14,8 @@ RString::RString(RString && other) NOEXCEPT {
     other.reset();
     return;
 }
-#pragma mark - private methods
 
+//general string usage
 void RString::reset() {
     reset_split_array();
     if(_str_){
@@ -58,7 +57,7 @@ void RString::append_split_array(const RString &s) const {
     if(split_count >= RString_MAX_LEN)
         return;
     if(!split_count){
-        split_array.reset(new _rsp[RString_MAX_SPLIT]);
+        RString::split_array.reset(new _rsp[RString_MAX_SPLIT]);
     }
     split_array[split_count] = std::make_shared<RString>(s);+
     ++split_count;
@@ -69,4 +68,11 @@ const char* RString::alloc_str(size_t s){
         reset();
     str_len = (s > RString_MAX_LEN) ? RString_MAX_LEN : s;
     return _str_;
+}
+
+//operator handling
+
+RString & RString::operator = (RString other){
+    swap(other);
+    return *this;
 }

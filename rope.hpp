@@ -59,7 +59,7 @@ public:
    RString & lower() const;
    RString & upper() const;
    //operators
-   bool operator == (const RString &) const;
+   bool operator = (const RString &) const;
    bool operator != (const RString &) const;
    bool operator > (const RString &) const;
    bool operator < (const RString &) const;
