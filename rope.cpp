@@ -1,4 +1,7 @@
+#include <iostream>
 #include "rope.hpp"
+
+int comb(char ** ret, const char * format, va_list a);
 
 size_t strlen(const char *string, int i);
 
@@ -136,6 +139,27 @@ const char RString::operator[](const int index) const {
         return 0;
     else
         return _str_[index];
+}
+
+RString & RString::format(const char *format, ...) {
+    char * buffer;
+    va_list args;
+    va_start(args, format);
+    comb(&buffer, format, args);
+    copy_str(buffer);
+    free(buffer);
+    return *this;
+}
+
+int comb(char ** ret, const char * format, va_list a){
+    int len;
+    char *buffer;
+    len = sizeof(format) + sizeof(a);
+    buffer = (char *) malloc(len * sizeof(char));
+    if(!buffer)
+        return 0;
+    *ret = buffer;
+    return len - 1;
 }
 
 size_t strlen(const char *string, int i) {

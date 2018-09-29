@@ -70,6 +70,7 @@ public:
    RString & operator = (const char * other);
    RString & operator += (const char *);
    RString & operator += (const RString *);
+   RString & operator + (const RString *);
    operator const char * () const;
 
    //find, replace and that shit
