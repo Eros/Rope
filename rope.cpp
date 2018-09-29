@@ -73,12 +73,13 @@ const char* RString::alloc_str(size_t s){
 }
 
 //operator handling
-
-RString & RString::operator=(RString other){
+/* throwing an error about it not being defined, even though it is
+ * TODO: Reevaluate this method
+RString & RString::operator = (RString other ) {
     swap(other);
     return *this;
 }
-
+*/
 RString & RString::operator+=(const char * r) {
     if(r){
         size_t newlen = str_len + strlen(r, RString_MAX_LEN);
@@ -96,6 +97,45 @@ RString & RString::operator+=(const char * r) {
     delete [] buf;
 
     return *this;
+}
+
+bool RString::operator!=(const RString & r) const {
+    if(std::strncmp(this->c_str(), r.c_str(), RString_MAX_LEN) != 0)
+        return true;
+}
+
+bool RString::operator<=(const RString & r) const {
+    if(std::strncmp(this->c_str(), r.c_str(), RString_MAX_LEN) <= 0)
+        return true;
+}
+
+bool RString::operator>=(const RString & r) const {
+    if(std::strncmp(this->c_str(), r.c_str(), RString_MAX_LEN) >= 0)
+        return true;
+}
+
+bool RString::operator<(const RString & r) const {
+    if(std::strncmp(this->c_str(), r.c_str(), RString_MAX_LEN) < 0)
+        return true;
+}
+
+bool RString::operator>(const RString & r) const {
+    if(std::strncmp(this->c_str(), r.c_str(), RString_MAX_LEN) > 0)
+        return true;
+}
+
+bool RString::operator==(const RString & r) const {
+    if(std::strncmp(this->c_str(), r.c_str(), RString_MAX_LEN) == 0)
+        return true;
+}
+
+const char RString::operator[](const int index) const {
+    if(index < 0)
+        return 0;
+    if(index >= (int) str_len)
+        return 0;
+    else
+        return _str_[index];
 }
 
 size_t strlen(const char *string, int i) {

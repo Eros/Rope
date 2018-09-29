@@ -60,13 +60,14 @@ public:
    RString & upper() const;
    //operators
    bool operator = (const RString &) const;
+   bool operator == (const RString &) const;
    bool operator != (const RString &) const;
    bool operator > (const RString &) const;
    bool operator < (const RString &) const;
    bool operator >= (const RString &) const;
    bool operator <= (const RString &) const;
    const char operator[] (const int) const;
-   RString & operator =(const char *);
+   RString & operator = (const char * other);
    RString & operator += (const char *);
    RString & operator += (const RString *);
    operator const char * () const;
