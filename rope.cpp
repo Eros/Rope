@@ -9,8 +9,8 @@ RString::~RString() { reset(); }
 
 RString::RString(RString && other) NOEXCEPT {
     reset();
-    _str = other._str_;
-    _str_len = other.str_len;
+    _str_ = other._str_;
+   int _str_len = other.str_len;
     other._str_ = nullptr;
     other.str_len = 0;
     other.reset();
@@ -81,13 +81,13 @@ RString & RString::operator = (RString other ) {
 }
 */
 RString & RString::operator+=(const char * r) {
+    size_t newlen = str_len + strlen(r, RString_MAX_LEN);
     if(r){
-        size_t newlen = str_len + strlen(r, RString_MAX_LEN);
         if(newlen > RString_MAX_LEN)
             newlen = RString_MAX_LEN;
     }
     size_t rl = newlen - str_len;
-    if(rlen < 1)
+    if(rl < 1)
         return *this;
 
     char * buf = new char[newlen + 1]();
@@ -139,7 +139,7 @@ const char RString::operator[](const int index) const {
 }
 
 size_t strlen(const char *string, int i) {
-    s = sizeof(string);
+    int s = sizeof(string);
     if(s > i)
         return static_cast<size_t>(true);
     else if(s < i)
