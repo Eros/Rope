@@ -54,6 +54,19 @@ const char * RString::copy_str(const char * s) {
     return _str_;
 }
 
+void RString::append_split_array(const RString &s) const {
+    if(split_count >= RString_MAX_LEN)
+        return;
+    if(!split_count){
+        split_array.reset(new _rsp[RString_MAX_SPLIT]);
+    }
+    split_array[split_count] = std::make_shared<RString>(s);+
+    ++split_count;
+}
+
 const char* RString::alloc_str(size_t s){
-    //TODO
+    if(_str_)
+        reset();
+    str_len = (s > RString_MAX_LEN) ? RString_MAX_LEN : s;
+    return _str_;
 }
