@@ -98,7 +98,10 @@ RString & RString::operator+=(const char * r) {
     return *this;
 }
 
-//todo make this work
 size_t strlen(const char *string, int i) {
-    return 0;
+    s = sizeof(string);
+    if(s > i)
+        return static_cast<size_t>(true);
+    else if(s < i)
+        return static_cast<size_t>(false);
 }
