@@ -1,5 +1,7 @@
 #include "rope.hpp"
 
+size_t strlen(const char *string, int i);
+
 RString::RString() { reset(); }
 RString::RString(const char * s) { copy_str(s); }
 RString::RString(const RString & old) { copy_str(old); }
@@ -72,7 +74,31 @@ const char* RString::alloc_str(size_t s){
 
 //operator handling
 
-RString & RString::operator = (RString other){
+RString & RString::operator=(RString other){
     swap(other);
     return *this;
+}
+
+RString & RString::operator+=(const char * r) {
+    if(r){
+        size_t newlen = str_len + strlen(r, RString_MAX_LEN);
+        if(newlen > RString_MAX_LEN)
+            newlen = RString_MAX_LEN;
+    }
+    size_t rl = newlen - str_len;
+    if(rlen < 1)
+        return *this;
+
+    char * buf = new char[newlen + 1]();
+    if(_str_ && str_len)
+        memcpy(buf, _str_, str_len);
+    copy_str(buf);
+    delete [] buf;
+
+    return *this;
+}
+
+//todo make this work
+size_t strlen(const char *string, int i) {
+    return 0;
 }
