@@ -162,6 +162,24 @@ int comb(char ** ret, const char * format, va_list a){
     return len - 1;
 }
 
+RString& RString::upper() const {
+    RString s;
+    s = *this;
+    for(size_t i = 0; s._str_[i]; ++i){
+        s._str_[i] = static_cast<char>(toupper(s._str_[i]));
+    }
+    return s;
+}
+
+RString & RString::lower() const {
+    RString s;
+    s = *this;
+    for(size_t i = 0; s._str_[i]; ++i){
+        s._str_[i] = static_cast<char>(tolower(s._str_[i]));
+    }
+    return s;
+}
+
 size_t strlen(const char *string, int i) {
     int s = sizeof(string);
     if(s > i)
